@@ -455,8 +455,8 @@ dispatch_async(queue, ^{ printf("I am a block."); });
         % side by side for producer consumer 2 figures each code blocks of C
         \begin{figure}[H]
             \centering
-            \begin{minipage}{0.49\textwidth}
-                \begin{minted}{c}
+            \begin{subfigure}{0.5\textwidth}
+                \begin{minted}[frame=lines, framesep=4mm, autogobble]{c}
                     while (true) {
                         /* produce an item in next produced */
                         while (counter == BUFFER_SIZE);
@@ -466,9 +466,9 @@ dispatch_async(queue, ^{ printf("I am a block."); });
                         counter++;
                     }
                 \end{minted}
-            \end{minipage}
-            \begin{minipage}{0.49\textwidth}
-                \begin{minted}{c}
+            \end{subfigure}
+            \begin{subfigure}{0.49\textwidth}
+                \begin{minted}[frame=lines, framesep=4mm, autogobble]{c}
                     while (true) {
                         while (counter == 0);
                             /* do nothing */
@@ -478,7 +478,7 @@ dispatch_async(queue, ^{ printf("I am a block."); });
                         /* consume the item in next_consumed */
                     }
                 \end{minted}
-            \end{minipage}
+            \end{subfigure}
             \caption{Producer and Consumer}
         \end{figure}
 
