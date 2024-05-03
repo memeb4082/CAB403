@@ -16,7 +16,7 @@
                         \begin{itemize}
                             \item User Interface - Almost all opeating systems have a user interface (UI)
                             \begin{itemize}
-                                \item Graphical (GUI)
+				\item Graphical (GUI)
                                 \item Command Line (CLI)
                                 \item Batch
                             \end{itemize}
@@ -26,6 +26,16 @@
                         \end{itemize}
                 \end{itemize}
     \chapter{Operating System Structures}
+	    An operating system provides the environment within which programs are executed. Internally, operating systems vary greatly in their makeup as they are organised to varying specifications.\\
+        Operating systems are viewed from several points. Such as the services provided (users), the interface provided (programmers), and the components and their interconnections (operating system designers).\\
+        \section{Operating System Services}
+        \section{User and Operating System Interface}
+            \subsection{Command Interpreters}
+            \subsection{Touch Screen Interface}
+        \section{System Calls}
+            \subsection{Example}
+            \subsection{API}
+            \subsection{Types of syscalls}
     \chapter{Processes}
         Batch systems define a \textcolor{blue}{job} as a program and its data, and a time-shared system defines a \textcolor{blue}{task or user program}
         as the unit of work.\\
@@ -507,7 +517,7 @@ dispatch_async(queue, ^{ printf("I am a block."); });
         \textcolor{red}{Even though $register_1$ and $register_2$ are local CPU registers, the value of
         this register will be saved and stored by the interrupt handler}\\
         The concurrent execution \texttt{count++} and \texttt{count -- 1} is equivalent
-        to the sequential execution where lower evel statements previously are interleaved
+        to the sequential execution where lower evel statements previously are intef rleaved
         in an arbitrary order, with the order of the high-level statement is preserved.\
         \begin{figure}[H]
             \centering
@@ -515,6 +525,56 @@ dispatch_async(queue, ^{ printf("I am a block."); });
                 $T_0$ & $producer$ & execute & $register_1 = count$ & \{$register_1$ = 5\}
             \end{tabular}
         \end{figure}
+        \section{The Critical-Section Problem}
+            In a system conssiting of \textit{n} processes \textit{$P_0, P_1, ... , P_{n-1}$}.
+            Each process has a segment of code, called a \textcolor{blue}{critical section} in which
+            the process is accessing and updating data that is shared with at least one process.
+            The important feature of the system is that when one process is executing in its critical 
+            section, no other process is allowed to execute in its critical section at the same time.\\
+            The \textit{The critical section problem} is to design a protocol that processes can use to
+            synchronize their activity to enter its critical section.\\
+            It consists of the following sections
+            \begin{itemize}
+                \item \textcolor{blue}{Entry section} Implements requests for permission to enter its critical
+                    section. Decides the entry of a particular process
+                \item \textcolor{blue}{Critical Section} Part which only one process can enter and modify the
+                    shared variable. This part of the process ensures that no other processes can access the 
+                    shared resource
+                \item \textcolor{blue}{Exit Section} Allows for other processes waiting in the entry section to
+                    enter the critical section. It checks that a process if completed the critical section can move
+                    to the remainder section
+                \item \textcolor{blue}{Remainder Section} The other parts of the code, other than the entry, critical,
+                    and exit sections
+            \end{itemize}
+            \subsection{Solution to the Critical Section Problem}
+                A solution must satisfy the following 3 requirements
+                \begin{itemize}
+                    \item \textcolor{blue}{Mutual Exclusion}\\\\
+                        \hspace*{1em}%
+                            \begin{minipage}{0.8\textwidth}%
+                                If process $\textit{P}_{\textit{i}}$ is executing in its critical section, then no other
+                                process can be executing in their critical section
+                            \end{minipage}%
+                    \item \textcolor{blue}{Progress}\\\\
+                        \hspace*{1em}%
+                            \begin{minipage}{0.8\textwidth}%
+                                If no process is executing in its critical section and some processes wish to 
+                                enter their critical sections, then only those processes that are not executing in their
+                                remainder sections can participate in deciding which will enter its critical section next,
+                                and this selection cannot be postponed indefinitely.
+                            \end{minipage}%
+                    \item \textcolor{blue}{Bounded Waiting}\\\\
+                        \hspace*{1em}%
+                            \begin{minipage}{0.8\textwidth}%
+                                There exists a bound, or limit, on the number of time that other processes are allowed to
+                                enter their critical sections after a process has made a request to enter its critical
+                                section and before that request is granted
+                            \end{minipage}%
+                \end{itemize}
+           We assume that each process is executing at a nonzero speed. However, we can make no assumption about the
+           relative speed of the processes.\\
+           Many kernel-mode processes may be active in the operating system at the same time. As a result the kernel code
+           (code implementing the operating system) may be subject to several possible race conditions.
     \chapter{Safety Critical Systems}
         \textbf{Safety} is the freedom from conditions that cause death, injury, illness, damage
         to or loss of equipment or property, or environmental harm\\
@@ -635,7 +695,9 @@ dispatch_async(queue, ^{ printf("I am a block."); });
                     \item Process switching from running state to the waiting state (I/O request, wait invocation for Terminating
                     a child process)
                     \item Process switching from running to ready state (interrupt)
-                    \item Process switching from waiting to ready (I/O completion, release of a semaphore)
+                    \item Process switching from waiting to ready (I/O completion, release of a             \subsection{API}
+                        \subsection{Types of syscalls}
+        semaphore)
                     \item Process terminating
                 \end{enumerate}
                 For circumstances 1 and 4, there is no choice in scheduling, a new process (if exists) must be

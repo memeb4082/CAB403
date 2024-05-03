@@ -1,3 +1,8 @@
+# macOS Finder files to ignore
+.AppleDouble
+.DS_Store
+.LSOverride
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
